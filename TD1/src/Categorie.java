@@ -1,21 +1,20 @@
-
-
 public class Categorie {
     
-    public void Add(int id_categorie, String titre){
-        PreparedStatement requete = prepareStatement("select id_categorie, titre from categorie where titre=? and id_categorie=?");
-        requete.setString(1, id_categorie);
-        requete.setString(2, titre);
-        ResultSet res = requete.executeQuery();
+    public static void add(int id_categorie, String titre){
+        //a completer
     }
 
-    public void Modify(int id_categorie, String titre){
-        PreparedStatement req = laConnexion.prepareStatement("insert into categorie (id_categorie, titre) values(?, ?)");
+    public static void delete(int id_categorie){
+        //a changer
+        Statement requete= laConnexion.createStatement();
+        int nblignes=requete.executeUpdate("delete from categorie where id_categorie=" +id_categorie);
     }
 
-    public void Delete(int id_categorie){
-        Statement requete = laConnexion.createStatement();
-        int nbLignes = requete.executeUpdate("delete from categorie where id_categorie=" + id_categorie);
+    public static void update(int id_categorie){
+        //a changer aussi
+        PreparedStatement requete= laConnexion.prepareStatement("delete from categorie where id_categorie=?");
+        requete.setInt(1, id_categorie);
+        int nblignes=requete.executeUpdate();
     }
 
 }
