@@ -2,42 +2,42 @@ package Application;
 
 import java.sql.*;
 
-public class Categorie {
-    
-    public static void add(int id_categorie, String titre, String visuel){
+public class Produit {
+    public static void add(int id_produit, String nom, String description, double tarif, String visuel, int id_categorie){
         try {
             Connection laConnexion = Connexion.creeConnexion();
             Statement requete= laConnexion.createStatement();
-            String query="INSERT INTO categorie VALUES("+id_categorie+",'"+titre+"', '"+visuel+"')";
+            String query="INSERT INTO produit VALUES("+id_produit+",'"+nom+"','"+description+"','"+tarif+"', '"+visuel+"', '"+id_categorie+"')";
             requete.executeUpdate(query);
-            System.out.println("Ligne de categorie ajoutee");
+            System.out.println("Produit ajoute");
         } catch(SQLException sqle){
             System.out.println("Probleme select:" +sqle.getMessage());
         }
     }
 
-    public static void delete(int id_categorie){
-    	try {
-            Connection laConnexion = Connexion.creeConnexion();
-            Statement requete= laConnexion.createStatement();
-            String query="delete from categorie where id_categorie="+id_categorie;
-            requete.executeUpdate(query);
-            System.out.println("categorie supprimee");
-        	} catch(SQLException sqle){
-            System.out.println("Probleme select:" +sqle.getMessage());
-            }  
-        }
-
-    public static void update(int id_categorie){
+    public static void delete(int id_produit){
         try {
             Connection laConnexion = Connexion.creeConnexion();
             Statement requete= laConnexion.createStatement();
-            String query="update from categorie";
+            String query="delete from produit where id_produit="+id_produit;
             requete.executeUpdate(query);
-            System.out.println("Ligne de categorie mise a jour");
-        	} catch(SQLException sqle){
+            System.out.println("produit supprime");
+            } catch(SQLException sqle){
             System.out.println("Probleme select:" +sqle.getMessage());
-        	}  
+            }  
+    }
+
+    public static void update(int id_produit){
+        try {
+            Connection laConnexion = Connexion.creeConnexion();
+            Statement requete= laConnexion.createStatement();
+            String query="update from produit where id_produit="+id_produit;
+            requete.executeUpdate(query);
+            System.out.println("produit mis a jour");
+            } catch(SQLException sqle){
+            System.out.println("Probleme select:" +sqle.getMessage());
+        }  
     }
 
 }
+
