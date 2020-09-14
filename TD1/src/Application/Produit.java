@@ -39,5 +39,27 @@ public class Produit {
         }  
     }
 
+    public static void AfficherProduit() {
+        try {
+            Connection laConnexion = Connexion.creeConnexion();
+            Statement requete = laConnexion.createStatement();
+            ResultSet res = requete.executeQuery("select id_produit, id_produit from Produit");
+            while (res.next()) {
+                String nom = res.getString("id_produit");
+                System.out.println(nom);
+            }
+
+
+            if (res != null)
+                res.close();
+            if (requete != null)
+                requete.close();
+            if (laConnexion != null)
+                laConnexion.close();
+
+        } catch (SQLException sqle) {
+            System.out.println("Pb dans select " + sqle.getMessage());
+        }
+    }
 }
 

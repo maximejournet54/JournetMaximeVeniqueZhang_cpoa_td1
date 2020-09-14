@@ -1,6 +1,7 @@
 package Application;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class Categorie {
     
@@ -39,5 +40,30 @@ public class Categorie {
             System.out.println("Probleme select:" +sqle.getMessage());
         	}  
     }
+    public static void AfficherCateg() {
+        try {
+            Connection laConnexion = Connexion.creeConnexion();
+            Statement requete = laConnexion.createStatement();
+            ResultSet res = requete.executeQuery("select id_categorie, id_categorie from Categorie");
+            while (res.next()) {
+                String nom = res.getString("id_categorie");
+                System.out.println(nom);
+            }
+
+
+            if (res != null)
+                res.close();
+            if (requete != null)
+                requete.close();
+            if (laConnexion != null)
+                laConnexion.close();
+
+        } catch (SQLException sqle) {
+            System.out.println("Pb dans select " + sqle.getMessage());
+        }
+
+    }
 
 }
+
+

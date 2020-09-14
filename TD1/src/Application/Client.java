@@ -38,6 +38,29 @@ public class Client {
             System.out.println("Probleme select:" +sqle.getMessage());
         }  
     }
+    public static void AfficherClient() {
+        try {
+            Connection laConnexion = Connexion.creeConnexion();
+            Statement requete = laConnexion.createStatement();
+            ResultSet res = requete.executeQuery("select id_client, id_client from Client");
+            while (res.next()) {
+                String nom = res.getString("id_client");
+                System.out.println(nom);
+            }
+
+
+            if (res != null)
+                res.close();
+            if (requete != null)
+                requete.close();
+            if (laConnexion != null)
+                laConnexion.close();
+
+        } catch (SQLException sqle) {
+            System.out.println("Pb dans select " + sqle.getMessage());
+        }
+
+    }
 }
     
 
