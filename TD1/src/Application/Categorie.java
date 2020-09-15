@@ -1,19 +1,18 @@
 package Application;
 
 import java.sql.*;
-import java.util.ArrayList;
 
 public class Categorie {
     
-    public static void add(int id_categorie, String titre, String visuel){
+    public static void add(int id_client, String nom , String prenom){
         try {
             Connection laConnexion = Connexion.creeConnexion();
             Statement requete= laConnexion.createStatement();
-            String query="INSERT INTO categorie VALUES("+id_categorie+",'"+titre+"', '"+visuel+"')";
+            String query="INSERT INTO Categorie VALUES("+id_client+",'"+nom+"', '"+prenom+"')";
             requete.executeUpdate(query);
             System.out.println("Ligne de categorie ajoutee");
         } catch(SQLException sqle){
-            System.out.println("Probleme select:" +sqle.getMessage());
+            System.out.println("Pb select:" +sqle.getMessage());
         }
     }
 
@@ -40,14 +39,19 @@ public class Categorie {
             System.out.println("Probleme select:" +sqle.getMessage());
         	}  
     }
-    public static void AfficherCateg() {
+    public static void AfficherCategorie() {
         try {
             Connection laConnexion = Connexion.creeConnexion();
             Statement requete = laConnexion.createStatement();
-            ResultSet res = requete.executeQuery("select id_categorie, id_categorie from Categorie");
+            ResultSet res = requete.executeQuery("select id_categorie, titre, visuel from Categorie");
             while (res.next()) {
-                String nom = res.getString("id_categorie");
-                System.out.println(nom);
+                String id = res.getString("id_categorie");
+                String titre=res.getString("titre");
+                String visuel=res.getString("visuel");
+                System.out.println(id);
+                System.out.println(titre);
+                System.out.println(visuel);
+                
             }
 
 

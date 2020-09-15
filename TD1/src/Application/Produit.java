@@ -7,7 +7,7 @@ public class Produit {
         try {
             Connection laConnexion = Connexion.creeConnexion();
             Statement requete= laConnexion.createStatement();
-            String query="INSERT INTO produit VALUES("+id_produit+",'"+nom+"','"+description+"','"+tarif+"', '"+visuel+"', '"+id_categorie+"')";
+            String query="INSERT INTO Produit VALUES("+id_produit+",'"+nom+"','"+description+"','"+tarif+"', '"+visuel+"', '"+id_categorie+"')";
             requete.executeUpdate(query);
             System.out.println("Produit ajoute");
         } catch(SQLException sqle){
@@ -19,7 +19,7 @@ public class Produit {
         try {
             Connection laConnexion = Connexion.creeConnexion();
             Statement requete= laConnexion.createStatement();
-            String query="delete from produit where id_produit="+id_produit;
+            String query="delete from Produit where id_produit="+id_produit;
             requete.executeUpdate(query);
             System.out.println("produit supprime");
             } catch(SQLException sqle){
@@ -31,7 +31,7 @@ public class Produit {
         try {
             Connection laConnexion = Connexion.creeConnexion();
             Statement requete= laConnexion.createStatement();
-            String query="update from produit where id_produit="+id_produit;
+            String query="update from Produit where id_produit="+id_produit;
             requete.executeUpdate(query);
             System.out.println("produit mis a jour");
             } catch(SQLException sqle){
@@ -43,12 +43,16 @@ public class Produit {
         try {
             Connection laConnexion = Connexion.creeConnexion();
             Statement requete = laConnexion.createStatement();
-            ResultSet res = requete.executeQuery("select id_produit, id_produit from Produit");
+            ResultSet res = requete.executeQuery("select * from Produit");
             while (res.next()) {
-                String nom = res.getString("id_produit");
+                String id = res.getString("id_produit");
+                String nom = res.getString("nom");
+                String description = res.getString("description");
+                
+                System.out.println(id);
                 System.out.println(nom);
+                System.out.println(description);
             }
-
 
             if (res != null)
                 res.close();

@@ -7,7 +7,7 @@ public class Client {
         try {
             Connection laConnexion = Connexion.creeConnexion();
             Statement requete= laConnexion.createStatement();
-            String query="INSERT INTO client VALUES("+id_client+",'"+nom+"','"+prenom+"','"+mdp+"','"+num+"','"+voie+"','"+cp+"','"+ville+"','"+pays+"')";
+            String query="INSERT INTO Client VALUES("+id_client+",'"+nom+"','"+prenom+"','"+mdp+"','"+num+"','"+voie+"','"+cp+"','"+ville+"','"+pays+"')";
             requete.executeUpdate(query);
             System.out.println("Produit ajoute");
         } catch(SQLException sqle){
@@ -19,7 +19,7 @@ public class Client {
         try {
             Connection laConnexion = Connexion.creeConnexion();
             Statement requete= laConnexion.createStatement();
-            String query="delete from client where id_client="+id_client;
+            String query="delete from Client where id_client="+id_client;
             requete.executeUpdate(query);
             System.out.println("client supprime");
             } catch(SQLException sqle){
@@ -31,7 +31,7 @@ public class Client {
         try {
             Connection laConnexion = Connexion.creeConnexion();
             Statement requete= laConnexion.createStatement();
-            String query="update from produit where id_client="+id_client;
+            String query="update from Client where id_client="+id_client;
             requete.executeUpdate(query);
             System.out.println("client mis a jour");
             } catch(SQLException sqle){
@@ -42,10 +42,14 @@ public class Client {
         try {
             Connection laConnexion = Connexion.creeConnexion();
             Statement requete = laConnexion.createStatement();
-            ResultSet res = requete.executeQuery("select id_client, id_client from Client");
+            ResultSet res = requete.executeQuery("select * from Client");
             while (res.next()) {
-                String nom = res.getString("id_client");
+                String id = res.getString("id_client");
+                String nom = res.getString("nom");
+                String prenom = res.getString("prenom");
+                System.out.println(id);
                 System.out.println(nom);
+                System.out.println(prenom);
             }
 
 
